@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>NT-CodeCraft – Clean Code. Klare Lösungen.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Programmierer-Schriftart -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0c0f16;
+      --accent: #00ff9c;
+      --accent-soft: rgba(0, 255, 156, 0.12);
+      --text: #f5f5f7;
+      --muted: #8b8f9c;
+      --border: #1b1f2b;
+      --error: #ff4b81;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --container: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #141824 0, #05060a 42%);
+      color: var(--text);
+      font-family: "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 10, 0.94), rgba(5, 6, 10, 0.78));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: radial-gradient(circle at 20% 0, #22ffc0, #00b07b 36%, #020308 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #020308;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .logo-text strong {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-text span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.18s ease-out;
+      text-transform: lowercase;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: none;
+      color: var(--text);
+      transition: 0.2s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00ff9c, #22ffe4);
+      color: #020308;
+      box-shadow: 0 10px 30px rgba(0, 255, 156, 0.26);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 15px 40px rgba(0, 255, 156, 0.32);
+    }
+
+    .btn-ghost {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 64px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(9, 12, 22, 0.9);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 255, 156, 0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed var(--border);
+      background: rgba(4, 7, 15, 0.8);
+    }
+
+    .hero-meta code {
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    /* Hero terminal card */
+
+    .hero-terminal {
+      background: radial-gradient(circle at 0 0, #151a27, #05060a 65%);
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-lights span {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #2a2f3e;
+    }
+
+    .traffic-lights span:nth-child(1) { background: #ff5f57; }
+    .traffic-lights span:nth-child(2) { background: #febc2e; }
+    .traffic-lights span:nth-child(3) { background: #28c840; }
+
+    .terminal-body {
+      font-size: 12px;
+      line-height: 1.7;
+      font-family: inherit;
+    }
+
+    .line {
+      display: block;
+      white-space: pre-wrap;
+    }
+
+    .prompt {
+      color: var(--accent);
+    }
+
+    .comment {
+      color: var(--muted);
+    }
+
+    .keyword {
+      color: #8ac6ff;
+    }
+
+    .string {
+      color: #ffdd7c;
+    }
+
+    .accent {
+      color: var(--accent);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 7px;
+      height: 13px;
+      background: var(--accent);
+      margin-left: 2px;
+      border-radius: 2px;
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 60% { opacity: 1; }
+      61%, 100% { opacity: 0; }
+    }
+
+    .terminal-footer-badge {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      font-size: 10px;
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(0, 0, 0, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    /* Sections */
+
+    section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    /* Services */
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(9, 11, 20, 0.96), rgba(6, 9, 15, 0.96));
+      padding: 16px 16px 15px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(0, 255, 156, 0.12), transparent 60%);
+      opacity: 0;
+      transition: 0.26s ease-out;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .chip {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+    }
+
+    .card-footer-link {
+      font-size: 11px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Workflow */
+
+    .workflow-list {
+      display: grid;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .workflow-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 11px;
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border);
+      background: rgba(5, 7, 12, 0.9);
+    }
+
+    .wf-step {
+      width: 18px;
+      height: 18px;
+      border-radius: 7px;
+      border: 1px solid var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--accent);
+      background: rgba(0, 255, 156, 0.07);
+    }
+
+    .workflow-item strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .workflow-item span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* About & contact */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    .about-text {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .about-text p + p {
+      margin-top: 10px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(4, 7, 14, 0.9);
+      color: var(--muted);
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at 0 0, rgba(0, 255, 156, 0.18), rgba(4, 7, 14, 0.98));
+      padding: 18px 16px 16px;
+      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+    }
+
+    .contact-card h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .contact-meta {
+      font-size: 12px;
+      display: grid;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .contact-meta span {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .contact-meta code {
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 0 20px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    footer .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 880px) {
+      .hero-grid,
+      .grid-3,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav {
+        padding: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="nav-left">
+          <div class="logo-mark">{ }</div>
+          <div class="logo-text">
+            <strong>NT-CODECRAFT</strong>
+            <span>clean code · klare lösungen</span>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#leistungen">// leistungen</a>
+          <a href="#ablauf">// ablauf</a>
+          <a href="#about">// about</a>
+          <a href="#kontakt">// kontakt</a>
+        </nav>
+        <div class="nav-cta">
+          <a href="#kontakt" class="btn btn-ghost">.requestQuote()</a>
+          <a href="#kontakt" class="btn btn-primary">Projekt starten</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>Freelance IT &amp; Code Consulting</span>
+        </div>
+
+        <h1>
+          <span>NT-CodeCraft</span><br/>
+          Clean Code. Klare Lösungen.
+        </h1>
+
+        <p class="hero-sub">
+          Ich helfe Unternehmen, Prozesse mit sauberem Code, kleinen Tools und schlanken Webanwendungen zu automatisieren – ohne
+          Over-Engineering und Buzzword-Bingo.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#kontakt" class="btn btn-primary">Unverbindliches Projekt anstoßen</a>
+          <a href="#leistungen" class="btn btn-ghost">Leistungen ansehen</a>
+        </div>
+
+        <div class="hero-meta">
+          <span><code>&gt;_</code> Fokus: Web, Automatisierung, Daten</span>
+          <span>// Stack: <code>Python · JS · SQL</code></span>
+          <span>// Projekte: <code>kleine bis mittlere Teams</code></span>
+        </div>
+      </div>
+
+      <aside class="hero-terminal" aria-label="Code-Beispiel">
+        <div class="terminal-header">
+          <div class="traffic-lights">
+            <span></span><span></span><span></span>
+          </div>
+          <span>nt-codecraft.sh</span>
+        </div>
+        <div class="terminal-body">
+          <span class="line comment"># automate the boring stuff</span>
+          <span class="line">
+            <span class="prompt">➜</span> <span class="keyword">from</span> nt_codecraft <span class="keyword">import</span> build_solution
+          </span>
+          <span class="line">
+            <span class="prompt">➜</span> project = {
+          </span>
+          <span class="line">    <span class="string">"type"</span>: <span class="string">"web + automation"</span>,</span>
+          <span class="line">    <span class="string">"goal"</span>: <span class="string">"weniger klicks, mehr klarheit"</span>,</span>
+          <span class="line">    <span class="string">"stack"</span>: [<span class="string">"python"</span>, <span class="string">"javascript"</span>, <span class="string">"sql"</span>]</span>
+          <span class="line">}</span>
+          <span class="line">
+            <span class="prompt">➜</span> result = build_solution(project)
+          </span>
+          <span class="line comment"># returns: stabile, wartbare lösung – ohne magie</span>
+          <span class="line">
+            <span class="prompt">➜</span> print(<span class="string">"ready when you are."</span>)<span class="cursor"></span>
+          </span>
+        </div>
+        <div class="terminal-footer-badge">
+          v1.0 · handcrafted in code
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">// Leistungen</h2>
+        <p class="section-sub">
+          Von kleinen Skripten bis zu schlanken Webanwendungen. Fokus: pragmatische Lösungen, die wirklich genutzt werden – nicht
+          nur schöne Folien.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-kicker">01 · Web</div>
+          <h3>Websites &amp; Webanwendungen</h3>
+          <p>
+            Leichte, schnelle Webauftritte und kleine Web-Tools, die sich sauber in bestehende Prozesse einfügen.
+          </p>
+          <div class="chip-row">
+            <span class="chip">One-Pager</span>
+            <span class="chip">Dashboards</span>
+            <span class="chip">APIs</span>
+          </div>
+          <div class="card-footer-link">ab ~450&nbsp;€ für One-Pager</div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">02 · Automation</div>
+          <h3>Skripte &amp; Automatisierung</h3>
+          <p>
+            Wiederkehrende Aufgaben automatisieren: Exporte, Reports, Dateioperationen, Daten-Schnittstellen.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Python</span>
+            <span class="chip">REST</span>
+            <span class="chip">Batch-Jobs</span>
+          </div>
+          <div class="card-footer-link">typisch 150–500&nbsp;€ pro Skript</div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">03 · Data</div>
+          <h3>Datenanalyse &amp; Clean-up</h3>
+          <p>
+            Daten aufräumen, strukturieren und auswerten – damit Entscheidungen nicht mehr auf Bauchgefühl basieren.
+          </p>
+          <div class="chip-row">
+            <span class="chip">SQL</span>
+            <span class="chip">Reporting</span>
+            <span class="chip">Ad-hoc-Analysen</span>
+          </div>
+          <div class="card-footer-link">pro Projekt individuell kalkuliert</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABLAUF -->
+  <section id="ablauf">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">// Ablauf</h2>
+        <p class="section-sub">
+          Klarer, transparenter Ablauf – ohne Agenturtheater. Ein Ansprechpartner, ein Kanal, ein Ergebnis.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="workflow-list">
+          <div class="workflow-item">
+            <div class="wf-step">1</div>
+            <div>
+              <strong>Kurzes Gespräch</strong>
+              <span>15–30 Minuten Call oder Mail-Austausch. Ziel, Status quo, Rahmen klären.</span>
+            </div>
+          </div>
+          <div class="workflow-item">
+            <div class="wf-step">2</div>
+            <div>
+              <strong>Konkretes Angebot</strong>
+              <span>Fixpreis oder klarer Stundensatz mit Aufwandsschätzung. Keine Überraschungen.</span>
+            </div>
+          </div>
+          <div class="workflow-item">
+            <div class="wf-step">3</div>
+            <div>
+              <strong>Umsetzung in Sprints</strong>
+              <span>Kurze Iterationen, Zwischenstände, Feedback-Loops. Sie sehen früh, wohin es geht.</span>
+            </div>
+          </div>
+          <div class="workflow-item">
+            <div class="wf-step">4</div>
+            <div>
+              <strong>Übergabe &amp; Feinschliff</strong>
+              <span>Abnahme, Dokumentation, optional: Wartung / Erweiterung.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-kicker">Transparenz</div>
+          <h3>Typische Projektgrößen</h3>
+          <p>
+            Die meisten Projekte starten im Bereich <strong>600–2.500&nbsp;€</strong>. Ich sage klar, wenn etwas
+            overkill ist – und wenn es sich lohnt, größer zu denken.
+          </p>
+          <div class="chip-row">
+            <span class="chip">&lt; 1 Woche Mini-Projekte</span>
+            <span class="chip">2–4 Wochen Standard</span>
+            <span class="chip">Langfristige Betreuung möglich</span>
+          </div>
+          <p class="hint">
+            Sie haben bereits ein bestehendes System? Ich docke mich lieber an, statt alles „neu zu erfinden“.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT + KONTAKT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">// About</h2>
+        <p class="section-sub">
+          NT-CodeCraft steht für pragmatischen, verständlichen Code. Technologie ist Mittel zum Zweck – nicht Selbstzweck.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div class="about-text">
+          <p>
+            Hinter NT-CodeCraft steht ein Entwickler, der beide Seiten kennt: Fachbereich und Technik. Ziel ist nicht
+            „noch ein Tool“, sondern weniger manuelle Arbeit, klarere Daten und robustere Abläufe.
+          </p>
+          <p>
+            Ich arbeite am liebsten eng mit den Menschen, die täglich im Prozess stehen – nicht nur mit PowerPoint-Folien.
+            Kleine Iterationen, direkte Feedbacks, konkrete Ergebnisse.
+          </p>
+          <div class="badge-row">
+            <span class="badge">Remote &amp; vor Ort nach Absprache</span>
+            <span class="badge">Deutsch &amp; Englisch</span>
+            <span class="badge">Fokus: kleine &amp; mittlere Unternehmen</span>
+          </div>
+        </div>
+
+        <section id="kontakt" class="contact-card">
+          <h3>Projekt anfragen</h3>
+          <p>
+            Eine kurze Mail mit ein paar Stichpunkten reicht. Ich melde mich mit Rückfragen oder einem konkreten Vorschlag.
+          </p>
+
+          <div class="contact-meta">
+            <span>
+              <span>E-Mail</span>
+              <code>hello@nt-codecraft.dev</code>
+            </span>
+            <span>
+              <span>Betreff</span>
+              <code>[Projekt] Kurzbeschreibung</code>
+            </span>
+          </div>
+
+          <a href="mailto:hello@nt-codecraft.dev?subject=%5BProjekt%5D%20NT-CodeCraft&body=Kurzbeschreibung%20Ihres%20Projekts%3A%0A-%20Was%20soll%20gel%C3%B6st%20werden%3F%0A-%20Bis%20wann%3F%0A-%20Technisches%20Umfeld%3F" class="btn btn-primary" style="width:100%; text-align:center; margin-bottom:6px;">
+            Mail vorbereiten
+          </a>
+          <p class="hint">
+            Alternativ: vorhandene Unterlagen / Screenshots anhängen – ich steige mich gern direkt in den Kontext ein.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> NT-CodeCraft. Clean code, klare lösungen.</span>
+      <span>
+        <a href="#top">nach oben</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Aktuelles Jahr automatisch setzen
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
