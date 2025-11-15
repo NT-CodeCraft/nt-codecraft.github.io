@@ -153,6 +153,8 @@
       color: var(--text);
       transition: 0.2s ease-out;
       white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .btn-primary {
@@ -540,6 +542,17 @@
       font-size: 13px;
     }
 
+    .contact-portrait {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      object-position: center 15%;
+      margin-bottom: 16px;
+      border: 2px solid var(--accent-soft);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
     .contact-card h3 {
       font-size: 15px;
       margin-bottom: 4px;
@@ -612,6 +625,29 @@
 
       .hero {
         padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .hero-grid {
+        gap: 30px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .section-sub {
+        max-width: 100%;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      section {
+        padding: 32px 0;
       }
     }
 
@@ -620,8 +656,213 @@
         flex-direction: column;
         align-items: stretch;
       }
+
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
       .nav {
         padding: 10px 0;
+      }
+
+      .nav-left {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .nav-cta {
+        flex-shrink: 0;
+      }
+
+      .nav-cta .btn {
+        font-size: 12px;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+
+      .logo-text {
+        font-size: 11px;
+      }
+
+      .logo-text span {
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 32px 0 28px;
+      }
+
+      .hero h1 {
+        font-size: clamp(24px, 6vw, 32px);
+        margin-bottom: 12px;
+      }
+
+      .hero-sub {
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero-meta span {
+        font-size: 10px;
+        padding: 6px 12px;
+      }
+
+      .hero-terminal {
+        padding: 14px 14px 12px;
+        border-radius: 16px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .terminal-body {
+        font-size: 11px;
+        line-height: 1.6;
+        word-break: break-word;
+      }
+
+      .terminal-body .line {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+      }
+
+      .section-title {
+        font-size: 16px;
+      }
+
+      .section-sub {
+        font-size: 12px;
+      }
+
+      .card {
+        padding: 14px 14px 13px;
+      }
+
+      .card h3 {
+        font-size: 14px;
+      }
+
+      .card p {
+        font-size: 11px;
+      }
+
+      .chip {
+        font-size: 9px;
+        padding: 2px 8px;
+      }
+
+      .workflow-item {
+        padding: 12px;
+        font-size: 11px;
+      }
+
+      .workflow-item strong {
+        font-size: 11px;
+      }
+
+      .workflow-item span {
+        font-size: 10px;
+      }
+
+      .about-text {
+        font-size: 12px;
+      }
+
+      .contact-card {
+        padding: 16px 14px 14px;
+        font-size: 12px;
+      }
+
+      .contact-portrait {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 12px;
+      }
+
+      .contact-card h3 {
+        font-size: 14px;
+      }
+
+      .contact-card p {
+        font-size: 11px;
+      }
+
+      .contact-meta {
+        font-size: 11px;
+      }
+
+      .contact-meta code {
+        font-size: 10px;
+        word-break: break-all;
+        hyphens: auto;
+      }
+
+      .contact-meta span {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+
+      .btn-primary {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      footer {
+        font-size: 10px;
+      }
+
+      .grid-3 {
+        gap: 14px;
+      }
+
+      .two-col {
+        gap: 20px;
+      }
+
+      .badge {
+        font-size: 10px;
+        padding: 3px 8px;
+      }
+
+      .badge-row {
+        gap: 6px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .logo-text strong {
+        font-size: 10px;
+      }
+
+      .logo-text span {
+        display: none;
+      }
+
+      .nav-cta .btn {
+        font-size: 11px;
+        padding: 7px 10px;
       }
     }
   </style>
@@ -646,7 +887,6 @@
           <a href="#kontakt">// kontakt</a>
         </nav>
         <div class="nav-cta">
-          <a href="#kontakt" class="btn btn-ghost">.requestQuote()</a>
           <a href="#kontakt" class="btn btn-primary">Projekt starten</a>
         </div>
       </div>
@@ -851,17 +1091,17 @@
             „noch ein Tool“, sondern weniger manuelle Arbeit, klarere Daten und robustere Abläufe.
           </p>
           <p>
-            Ich arbeite am liebsten eng mit den Menschen, die täglich im Prozess stehen – nicht nur mit PowerPoint-Folien.
-            Kleine Iterationen, direkte Feedbacks, konkrete Ergebnisse.
+            Ich arbeite am liebsten eng mit den Menschen, die täglich im Prozess stehen. Kleine Iterationen, direkte Feedbacks, konkrete Ergebnisse.
           </p>
           <div class="badge-row">
-            <span class="badge">Nur Remote</span>
+            <span class="badge">Remote</span>
             <span class="badge">Deutsch &amp; Englisch</span>
             <span class="badge">Fokus: kleine Teams</span>
           </div>
         </div>
 
         <section id="kontakt" class="contact-card">
+          <img src="portrait.png" alt="Portrait" class="contact-portrait" />
           <h3>Projekt anfragen</h3>
           <p>
             Eine kurze Mail mit ein paar Stichpunkten reicht. Ich melde mich mit Rückfragen oder einem konkreten Vorschlag.
