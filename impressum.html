@@ -138,6 +138,13 @@
       margin-bottom: 16px;
     }
 
+    .content h3 {
+      font-size: 14px;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 14px 0 20px;
@@ -161,12 +168,86 @@
       color: var(--accent);
     }
 
+    @media (max-width: 880px) {
+      .container {
+        padding: 0 16px;
+      }
+    }
+
     @media (max-width: 520px) {
       .nav {
         padding: 10px 0;
       }
+
+      .logo-text {
+        font-size: 11px;
+      }
+
+      .logo-text span {
+        font-size: 10px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
       .content {
-        padding: 40px 0;
+        padding: 32px 0;
+      }
+
+      .content h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      .content h2 {
+        font-size: 14px;
+        margin-top: 24px;
+        margin-bottom: 10px;
+      }
+
+      .content h3 {
+        font-size: 13px;
+        margin-top: 20px;
+        margin-bottom: 8px;
+      }
+
+      .content p,
+      .content address {
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      footer {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .logo-text strong {
+        font-size: 10px;
+      }
+
+      .logo-text span {
+        display: none;
+      }
+
+      .content {
+        padding: 24px 0;
+      }
+
+      .content h1 {
+        font-size: 18px;
       }
     }
   </style>
