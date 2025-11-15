@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projekte – NT-CodeCraft</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Programmierer-Schriftart -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0c0f16;
+      --accent: #00ff9c;
+      --accent-soft: rgba(0, 255, 156, 0.12);
+      --text: #f5f5f7;
+      --muted: #8b8f9c;
+      --border: #1b1f2b;
+      --error: #ff4b81;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+      --container: 1080px;
+    }
+
+    [data-theme="light"] {
+      --bg: #fafbfc;
+      --bg-alt: #ffffff;
+      --accent: #00875a;
+      --accent-soft: rgba(0, 135, 90, 0.15);
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --error: #dc2626;
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      background: radial-gradient(circle at top, #141824 0, #05060a 42%);
+      color: var(--text);
+      font-family: "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="light"] html,
+    [data-theme="light"] body {
+      background: radial-gradient(circle at top, #f0f4f8 0, #fafbfc 42%);
+    }
+
+    body {
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 10, 0.94), rgba(5, 6, 10, 0.78));
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    header .container {
+      max-width: 100%;
+      padding: 0 40px;
+    }
+
+    [data-theme="light"] header {
+      background: linear-gradient(to bottom, rgba(250, 251, 252, 0.94), rgba(250, 251, 252, 0.78));
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: radial-gradient(circle at 20% 0, #22ffc0, #00b07b 36%, #020308 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #020308;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7), 0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .logo-text strong {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-text span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.18s ease-out;
+      text-transform: lowercase;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent-soft);
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease-out;
+      font-size: 11px;
+      text-transform: lowercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 255, 156, 0.3);
+    }
+
+    [data-theme="light"] .theme-toggle {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: var(--accent-soft);
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+      background: var(--accent);
+      color: var(--bg-alt);
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0, 135, 90, 0.3);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: none;
+      color: var(--text);
+      transition: 0.2s ease-out;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00ff9c, #22ffe4);
+      color: #020308;
+      box-shadow: 0 10px 30px rgba(0, 255, 156, 0.26);
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 15px 40px rgba(0, 255, 156, 0.32);
+    }
+
+    .btn-ghost {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    /* Hero */
+
+    .hero {
+      padding: 64px 0 56px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(9, 12, 22, 0.9);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(0, 255, 156, 0.9);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 22px;
+    }
+
+    /* Sections */
+
+    section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    /* Services */
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, rgba(9, 11, 20, 0.96), rgba(6, 9, 15, 0.96));
+      padding: 16px 16px 15px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    [data-theme="light"] .card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(250, 251, 252, 0.96));
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(0, 255, 156, 0.12), transparent 60%);
+      opacity: 0;
+      transition: 0.26s ease-out;
+      pointer-events: none;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-kicker {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .chip {
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="light"] .chip {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 0 20px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    footer .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    footer a {
+      color: var(--muted);
+    }
+
+    footer a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 880px) {
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .section-sub {
+        max-width: 100%;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      header .container {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 32px 0;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav {
+        padding: 10px 0;
+      }
+
+      .nav-left {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .nav-cta {
+        flex-shrink: 0;
+      }
+
+      .nav-cta .btn {
+        font-size: 12px;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+
+      .theme-toggle {
+        padding: 6px 12px;
+        font-size: 10px;
+      }
+
+      .logo-text {
+        font-size: 11px;
+      }
+
+      .logo-text span {
+        font-size: 10px;
+      }
+
+      .hero {
+        padding: 32px 0 28px;
+      }
+
+      .hero h1 {
+        font-size: clamp(24px, 6vw, 32px);
+        margin-bottom: 12px;
+      }
+
+      .hero-sub {
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+
+      .section-title {
+        font-size: 16px;
+      }
+
+      .section-sub {
+        font-size: 12px;
+      }
+
+      .card {
+        padding: 14px 14px 13px;
+      }
+
+      .card h3 {
+        font-size: 14px;
+      }
+
+      .card p {
+        font-size: 11px;
+      }
+
+      .chip {
+        font-size: 9px;
+        padding: 2px 8px;
+      }
+
+      .grid-3 {
+        gap: 14px;
+      }
+
+      footer {
+        font-size: 10px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .hero h1 {
+        font-size: 22px;
+      }
+
+      .logo-text strong {
+        font-size: 10px;
+      }
+
+      .logo-text span {
+        display: none;
+      }
+
+      .nav-cta .btn {
+        font-size: 11px;
+        padding: 7px 10px;
+      }
+
+      .theme-toggle {
+        padding: 5px 10px;
+        font-size: 9px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="nav-left">
+          <a href="index.html">
+            <div class="logo-mark">{ }</div>
+          </a>
+          <a href="index.html" class="logo-text">
+            <strong>NT-CODECRAFT</strong>
+            <span>clean code · klare lösungen</span>
+          </a>
+        </div>
+        <nav class="nav-links">
+          <a href="index.html#leistungen">// leistungen</a>
+          <a href="projekte.html" class="active">// projekte</a>
+          <a href="index.html#ablauf">// ablauf</a>
+          <a href="index.html#kompetenzen">// kompetenzen</a>
+          <a href="index.html#about">// about &amp; kontakt</a>
+        </nav>
+        <div class="nav-cta">
+          <button class="theme-toggle" id="themeToggle" aria-label="Theme wechseln" title="Theme wechseln">
+            <span id="themeText">dark mode</span>
+          </button>
+          <a href="index.html#kontakt" class="btn btn-primary">Projekt starten</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span>Portfolio</span>
+      </div>
+
+      <h1>
+        <span>Projekte</span><br/>
+        Übersicht der umgesetzten Lösungen
+      </h1>
+
+      <p class="hero-sub">
+        Eine Auswahl der Projekte, die ich entwickelt habe – von Immobilienanalyse bis KI-gestützter Automatisierung.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJEKTE -->
+  <section id="projekte">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">// Projekte</h2>
+        <p class="section-sub">
+          Datengetriebene Lösungen für komplexe Prozesse, große Datenmengen und intelligente Automatisierung.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <div class="card-kicker">Immobilienanalyse</div>
+          <h3>Datenqualität &amp; Validierung</h3>
+          <p>
+            Webtools für Standort- und Bewertungsanalysen, automatisierte Validierung großer Immobiliendatenbanken mit Bild-/Text-Vergleichen und Quantilverfahren.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Datenvalidierung</span>
+            <span class="chip">Visualisierung</span>
+            <span class="chip">Reporting</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">Web Scraping</div>
+          <h3>Datenpipelines &amp; Crawler</h3>
+          <p>
+            Crawler für internationale Immobilienportale mit ID-Management, Fehlerhandling und persistenter Datenspeicherung. Bild-Pipelines mit KI-Analyse und Dashboard-Visualisierung.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Selenium</span>
+            <span class="chip">BeautifulSoup</span>
+            <span class="chip">KI-Analyse</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">Geodaten &amp; GIS</div>
+          <h3>Geografische Intelligenz</h3>
+          <p>
+            Automatisierte OSM-, GeoJSON- und ALKIS-Datenverarbeitung. Bodenrichtwert-Analysen, Flurstücksauswertungen und Nutzungsvisualisierungen für Research.
+          </p>
+          <div class="chip-row">
+            <span class="chip">QGIS</span>
+            <span class="chip">OSM</span>
+            <span class="chip">ALKIS</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">Datenanalyse</div>
+          <h3>Reporting &amp; Monitoring</h3>
+          <p>
+            Mieten-, Gebiets- und Marktanalysen. Monitoring-Tools für Insolvenz- und Strukturentwicklungen. Automatisierte Excel- und CSV-Berichte.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Pandas</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Dashboards</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">Automatisierung</div>
+          <h3>Dokumentenverarbeitung</h3>
+          <p>
+            PDF-Parsing, Batch-Verarbeitung, strukturierte Datenauslesung. Mailer-GUI mit Ordnerüberwachung, automatischem HTML-E-Mail-Versand und Logging.
+          </p>
+          <div class="chip-row">
+            <span class="chip">PDF-Parsing</span>
+            <span class="chip">Tkinter</span>
+            <span class="chip">Batch-Jobs</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-kicker">KI &amp; Dashboards</div>
+          <h3>State-of-the-Art Projekte</h3>
+          <p>
+            Trikotnummernerkennung per KI mit vollautomatischer Auslesung und Klassifizierung. Projekt-Dashboard mit Nutzerverwaltung, Excel-Aggregation und interaktiven Visualisierungen.
+          </p>
+          <div class="chip-row">
+            <span class="chip">KI-Erkennung</span>
+            <span class="chip">Dashboard</span>
+            <span class="chip">Login-System</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> NT-CodeCraft. Clean code, klare lösungen.</span>
+      <span>
+        <a href="#top">nach oben</a> · 
+        <a href="index.html">zur Startseite</a> · 
+        <a href="impressum.html">Impressum</a> · 
+        <a href="datenschutz.html">Datenschutz</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Management
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = document.getElementById('themeText');
+    const html = document.documentElement;
+
+    // Theme aus localStorage laden oder Dark Mode als Standard setzen
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    if (themeText) {
+      themeText.textContent = currentTheme === 'light' ? 'dark mode' : 'light mode';
+    }
+
+    // Theme Toggle Funktion
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        if (themeText) {
+          themeText.textContent = newTheme === 'light' ? 'dark mode' : 'light mode';
+        }
+      });
+    }
+
+    // Aktuelles Jahr automatisch setzen
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Für Links zu anderen Seiten mit Hash: Flag setzen
+    document.querySelectorAll('a[href*=".html#"], a[href*="index.html#"]').forEach(link => {
+      link.addEventListener('click', function() {
+        sessionStorage.setItem('navigatedFromOtherPage', 'true');
+      });
+    });
+  </script>
+
+</body>
+</html>
+
