@@ -17,3 +17,13 @@ Die Website ist erreichbar unter:
 ├── index.html      # Hauptseite (kompletter One-Pager)
 ├── assets/         # Optional: Bilder, Logos, Favicons
 └── README.md       # Diese Datei
+
+---
+
+## 📝 Lizenz
+
+Alle Rechte vorbehalten.
+© NT-CodeCraft
+
+
+
