@@ -34,6 +34,12 @@
       color: var(--text);
       font-family: "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
     a {
@@ -109,6 +115,7 @@
       padding: 64px 20px;
       max-width: 700px;
       margin: 0 auto;
+      flex: 1;
     }
 
     .content h1 {
@@ -150,6 +157,7 @@
       padding: 14px 0 20px;
       font-size: 11px;
       color: var(--muted);
+      margin-top: auto;
     }
 
     footer .footer-inner {
