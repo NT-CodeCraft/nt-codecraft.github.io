@@ -6,7 +6,9 @@
   <link rel="icon" type="image/png" href="favicon-256x256.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; upgrade-insecure-requests" />
+  <link rel="stylesheet" href="fonts/source-code-pro.css" />
 
   <style>
     :root {
@@ -303,12 +305,12 @@
 
     <p>
       <strong>Wie erfassen wir Ihre Daten?</strong><br/>
-      Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben oder per E-Mail senden.
+      Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen – insbesondere, wenn Sie uns per E-Mail kontaktieren. Zum anderen entstehen beim Aufruf der Website technische Verbindungsdaten beim Hosting-Anbieter (siehe Abschnitt „Hosting").
     </p>
 
     <p>
       <strong>Wofür nutzen wir Ihre Daten?</strong><br/>
-      Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
+      Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Kontaktanfragen nutzen wir ausschließlich zur Bearbeitung Ihres Anliegens. Es findet keine Analyse Ihres Nutzerverhaltens und kein Tracking statt.
     </p>
 
     <h2>2. Hosting</h2>
@@ -316,10 +318,10 @@
       Diese Website wird bei GitHub Pages gehostet. Anbieter ist die GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.
     </p>
     <p>
-      Wenn Sie diese Website besuchen, erfasst GitHub verschiedene Logfiles inklusive Ihrer IP-Adressen. Details entnehmen Sie der Datenschutzerklärung von GitHub: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement</a>
+      Wenn Sie diese Website besuchen, erfasst GitHub verschiedene Logfiles inklusive Ihrer IP-Adressen. Details entnehmen Sie der Datenschutzerklärung von GitHub: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer">https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement</a>
     </p>
     <p>
-      Die Verwendung von GitHub Pages erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website.
+      Die Verwendung von GitHub Pages erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website. Eine Übermittlung in die USA kann nicht ausgeschlossen werden; GitHub stützt sich hierfür auf die EU-Standardvertragsklauseln bzw. das EU-US Data Privacy Framework, soweit anwendbar.
     </p>
 
     <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
@@ -335,7 +337,7 @@
     </p>
     <p>
       NT-CodeCraft<br/>
-      Freelance IT & Code Consulting<br/>
+      Freelance IT &amp; Code Consulting<br/>
       E-Mail: <a href="mailto:nt.codecraft@gmail.com">nt.codecraft@gmail.com</a>
     </p>
 
@@ -354,20 +356,36 @@
       Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen.
     </p>
 
+    <h3>Ihre Rechte</h3>
+    <p>
+      Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie das Recht, sich bei einer Aufsichtsbehörde zu beschweren.
+    </p>
+
     <h3>SSL- bzw. TLS-Verschlüsselung</h3>
     <p>
       Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
     </p>
 
-    <h2>4. Kontaktaufnahme</h2>
+    <h2>4. Lokale Speicherung im Browser</h2>
     <p>
-      Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben aus dem E-Mail-Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+      Diese Website speichert lokal in Ihrem Browser (localStorage/sessionStorage) technische Einstellungen – insbesondere Ihre Theme-Präferenz (Hell-/Dunkelmodus) sowie einen kurzlebigen Navigationshinweis für Abschnitte auf der Startseite. Diese Daten verbleiben ausschließlich auf Ihrem Gerät, werden nicht an uns übermittelt und dienen der komfortablen Darstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).
+    </p>
+    <p>
+      Es werden keine Cookies zu Analyse-, Marketing- oder Tracking-Zwecken gesetzt. Es kommen keine Analyse-Tools (z.&nbsp;B. Google Analytics) und keine Skripte von Drittanbietern zum Einsatz. Die verwendete Schriftart „Source Code Pro“ wird lokal von diesem Server ausgeliefert und nicht von Google oder anderen Drittanbietern geladen.
+    </p>
+
+    <h2>5. Kontaktaufnahme</h2>
+    <p>
+      Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben inklusive der von Ihnen mitgeteilten Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
     </p>
     <p>
       Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), sofern diese abgefragt wurde.
     </p>
     <p>
-      Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z. B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.
+      Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.
+    </p>
+    <p>
+      Hinweis: Der Versand per E-Mail erfolgt in der Regel unverschlüsselt. Für vertrauliche Inhalte empfehlen wir eine vorherige Abstimmung eines sicheren Übertragungswegs.
     </p>
   </main>
 
