@@ -6,8 +6,8 @@
   <link rel="icon" type="image/png" href="favicon-256x256.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Programmierer-Schriftart -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; upgrade-insecure-requests" />
 
   <style>
     :root {
@@ -1593,6 +1593,13 @@
     // Offset für sticky Header
     const headerOffset = 80;
 
+    // Nur sichere ID-Selektoren erlauben (kein CSS/XSS über location.hash)
+    function getSafeHashTarget(rawHash) {
+      if (!rawHash || rawHash === '#') return null;
+      if (!/^#[A-Za-z][\w-]*$/.test(rawHash)) return null;
+      return document.getElementById(rawHash.slice(1));
+    }
+
     function scrollToElement(element) {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -1607,7 +1614,7 @@
       if (hash && isNavigationFromOtherPage) {
         // Wenn Hash vorhanden und von anderer Seite navigiert -> zum Hash scrollen
         setTimeout(function() {
-          const target = document.querySelector(hash);
+          const target = getSafeHashTarget(hash);
           if (target) {
             scrollToElement(target);
           }
@@ -1626,7 +1633,7 @@
         const href = this.getAttribute('href');
         if (href !== '#' && href !== '#top') {
           e.preventDefault();
-          const target = document.querySelector(href);
+          const target = getSafeHashTarget(href);
           if (target) {
             scrollToElement(target);
             // Hash in URL aktualisieren

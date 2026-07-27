@@ -1,0 +1,4 @@
+Contact: mailto:nt.codecraft@gmail.com
+Preferred-Languages: de, en
+Canonical: https://nt-codecraft.github.io/.well-known/security.txt
+Expires: 2027-07-27T00:00:00.000Z
